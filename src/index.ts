@@ -1,10 +1,10 @@
 import { config } from "dotenv";
 import { ChatInputCommandInteraction, Client, Interaction } from "discord.js";
 import { PrismaClient } from "@prisma/client";
-import { whois } from "./commands/moderator/whois/whois";
-import { setMod } from "./commands/moderator/setModRole";
+import { whois } from "./commands/moderator/whois";
 import { getCoords } from "./commands/coords/getCoords";
 import { setCoords } from "./commands/coords/setCoords";
+import { setIGN } from "./commands/link/setIGN";
 
 config(); // Set up dotenv config and get it from root of project
 
@@ -31,11 +31,11 @@ client.on("interactionCreate", async (interaction: Interaction) => {
   }
   switch (command) {
     case "whois":
-      // TODO: Implement mod checking.
       whois(interaction as ChatInputCommandInteraction);
       break;
-    case "setmod":
-      setMod(interaction as ChatInputCommandInteraction);
+    case "minecraft":
+      setIGN(interaction as ChatInputCommandInteraction);
+      break;
     case "coords-set":
       setCoords(interaction as ChatInputCommandInteraction);
       break;

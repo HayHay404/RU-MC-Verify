@@ -41,7 +41,7 @@ export async function sendEmail(discordId : string, netID: string) {
         html: `Your verification code is: ${code}`
     })
 
-    db.user.update({
+    await db.user.update({
         data: {
             code,
             progress: "IN_PROGRESS",
