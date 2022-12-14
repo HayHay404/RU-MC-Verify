@@ -24,4 +24,23 @@ model User {
   netid     String?  @unique
   mcuuid    String?  @unique
   code      String?
+  coords    Coords[]
+}
+
+model DiscordServer {
+  id        Int      @id @default(autoincrement())
+  serverId  String   @unique
+  modRoleId String[]
+  coords    Coords[]
+}
+
+model Coords {
+  id              Int           @id @default(autoincrement())
+  coords          String
+  name            String
+  userId          Int
+  discordServerId Int
+  user            User          @relation(fields: [userId], references: [id])
+  discordServer   DiscordServer @relation(fields: [discordServerId], references: [id])
+  isPublic        Boolean       @default(false)
 }

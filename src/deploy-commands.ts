@@ -57,6 +57,18 @@ const commands = [
       option
         .setName("coords")
         .setDescription("Your coords")
+        .setRequired(true)
+    )
+    .addStringOption((option) =>
+      option
+        .setName("name")
+        .setDescription("The name of your location")
+        .setRequired(true)
+    )
+    .addBooleanOption((option) =>
+      option
+        .setName("public")
+        .setDescription("Whether or not open to use by the public")
         .setRequired(false)
     ),
   
@@ -67,6 +79,12 @@ const commands = [
       option
         .setName("user")
         .setDescription("The user to get coords for")
+        .setRequired(false)
+    )
+    .addBooleanOption((option) =>
+      option
+        .setName("public")
+        .setDescription("Whether or not to get public coords")
         .setRequired(false)
     ),
 ];
