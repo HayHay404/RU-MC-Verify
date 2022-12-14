@@ -21,13 +21,11 @@ export async function whois(interaction: ChatInputCommandInteraction<CacheType>)
     || interaction.memberPermissions?.has("Administrator") 
     || interaction.memberPermissions?.has("ManageGuild");
 
-
-    if (discordId !== undefined && (discordId?.id !== interaction.user.id || !hasPerms)) {
-        await interaction.reply({
-            ephemeral: true,
-            content: "You do not have permission to view others' info."
-        });
-        return;
+    if (!hasPerms) {
+        if (discordId !== interaction.user) {
+            interaction.reply({ content: "You do not have permission to use this command on other users.", ephemeral: true });
+            return;
+        }
     }
 
     if (discordId) {
