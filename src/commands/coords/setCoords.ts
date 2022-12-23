@@ -61,5 +61,5 @@ export async function setCoords(interaction : ChatInputCommandInteraction<CacheT
             iconURL: interaction.user.avatarURL()!
         });
 
-    await interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed], ephemeral: true });
 }

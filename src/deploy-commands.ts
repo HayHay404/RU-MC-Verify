@@ -87,6 +87,10 @@ const commands = [
         .setDescription("Whether or not to get public coords")
         .setRequired(false)
     ),
+
+  new SlashCommandBuilder()
+    .setName("coords-delete")
+    .setDescription("Delete your coords")
 ];
 
 config();

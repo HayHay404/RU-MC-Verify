@@ -86,6 +86,7 @@ export async function getCoords(
 
   await interaction.reply({
     embeds: [embed],
+    ephemeral: true,
   });
 
   return;

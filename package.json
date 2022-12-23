@@ -15,6 +15,7 @@
     "axios": "^1.2.0",
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3",
+    "minecraft-server-util": "^5.3.1",
     "nodemailer": "^6.4.17"
   },
   "devDependencies": {

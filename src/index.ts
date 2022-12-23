@@ -1,10 +1,11 @@
 import { config } from "dotenv";
-import { ChatInputCommandInteraction, Client, Interaction } from "discord.js";
+import { ChatInputCommandInteraction, Client, Interaction, StringSelectMenuInteraction } from "discord.js";
 import { PrismaClient } from "@prisma/client";
 import { whois } from "./commands/moderator/whois";
 import { getCoords } from "./commands/coords/getCoords";
 import { setCoords } from "./commands/coords/setCoords";
 import { setIGN } from "./commands/link/setIGN";
+import { deleteCoords } from "./commands/coords/delCoords";
 
 config(); // Set up dotenv config and get it from root of project
 
@@ -24,26 +25,44 @@ client.on("interactionCreate", async (interaction: Interaction) => {
   // Check if the interaction is a command and then reply if the command is "ping"
   if (!interaction.isCommand()) return; // If the interaction isn't a command, return (stop the function
 
-  const command = interaction.commandName; // Get the command name from the interaction
+    const command = interaction.commandName; // Get the command name from the interaction
 
-  if (command === "ping") {
-    await interaction.reply("pong");
-  }
-  switch (command) {
-    case "whois":
-      whois(interaction as ChatInputCommandInteraction);
-      break;
-    case "minecraft":
-      setIGN(interaction as ChatInputCommandInteraction);
-      break;
-    case "coords-set":
-      setCoords(interaction as ChatInputCommandInteraction);
-      break;
-    case "coords-get":
-      getCoords(interaction as ChatInputCommandInteraction);
-      break;
-    
-    default:
-      break;
-  }
+    if (command === "ping") {
+      await interaction.reply("pong");
+    }
+    switch (command) {
+      case "whois":
+        whois(interaction as ChatInputCommandInteraction);
+        break;
+      case "minecraft":
+        setIGN(interaction as ChatInputCommandInteraction);
+        break;
+      case "coords-set":
+        setCoords(interaction as ChatInputCommandInteraction);
+        break;
+      case "coords-get":
+        getCoords(interaction as ChatInputCommandInteraction);
+        break;
+      case "coords-delete":
+        deleteCoords(interaction as ChatInputCommandInteraction);
+        break;
+      
+      default:
+        break;
+    }
 });
+
+// client.on("interactionCreate", async (interaction: Interaction) => {
+//   if (!interaction.isStringSelectMenu()) return;
+
+//   const customId = interaction.customId;
+
+//   switch (customId) {
+//     case "deleteCoords":/
+//       deleteCoords(interaction as StringSelectMenuInteraction);
+//       break;
+  
+//     default:
+//       break;
+//   }
+// }
