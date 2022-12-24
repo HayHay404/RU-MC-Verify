@@ -8,8 +8,9 @@ config({});
 export async function serverInfo(
   interaction: ChatInputCommandInteraction<CacheType>
 ) {
-  const ip = process.env.MC_SERVER_IP || "not set";
-  const port = process.env.MC_SERVER_PORT || "not set";
+  const ip = process.env.MC_PROXY_IP || process.env.MC_SERVER_IP || "not set";
+  const port =
+    process.env.MC_PROXY_PORT || process.env.MC_SERVER_PORT || "not set";
   const version = process.env.MC_SERVER_VERSION || "not set";
   const { isOnline, players } = await mcStatus();
   let { max, online } = players;
@@ -27,10 +28,10 @@ export async function serverInfo(
       { name: "Players Online", value: isOnline ? online.toString() : "0" },
       { name: "Max Players", value: isOnline ? max.toString() : "0" },
       {
-        name: "Current online players",
+        name: "Player List",
         value:
-          isOnline && players.list !== undefined
-            ? players.list!.join(", ")
+          isOnline && players.list?.length && players.list.length > 0
+            ? players.list?.join(", ")
             : "N/A",
       }
     )
