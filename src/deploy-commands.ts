@@ -54,10 +54,7 @@ const commands = [
     .setName("coords-set")
     .setDescription("Set your coords")
     .addStringOption((option) =>
-      option
-        .setName("coords")
-        .setDescription("Your coords")
-        .setRequired(true)
+      option.setName("coords").setDescription("Your coords").setRequired(true)
     )
     .addStringOption((option) =>
       option
@@ -71,7 +68,7 @@ const commands = [
         .setDescription("Whether or not open to use by the public")
         .setRequired(false)
     ),
-  
+
   new SlashCommandBuilder()
     .setName("coords-get")
     .setDescription("Get your coords")
@@ -90,7 +87,15 @@ const commands = [
 
   new SlashCommandBuilder()
     .setName("coords-delete")
-    .setDescription("Delete your coords")
+    .setDescription("Delete your coords"),
+
+  new SlashCommandBuilder()
+    .setName("server")
+    .setDescription("Get info about the server"),
+
+  new SlashCommandBuilder()
+    .setName("ip")
+    .setDescription("Get info about the server"),
 ];
 
 config();

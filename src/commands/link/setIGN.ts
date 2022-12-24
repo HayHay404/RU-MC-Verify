@@ -2,6 +2,8 @@ import { CacheType, ChatInputCommandInteraction, InteractionType } from "discord
 import { db } from "../../index";
 import { mcToUUID } from "../../scripts/mcuuid/mcUUID";
 import { whois } from "../moderator/whois";
+import { serverInfo } from "../server/serverInfo";
+import { whitelist } from "./autoWhitelist";
 
 export async function setIGN(interaction : ChatInputCommandInteraction<CacheType>) {
     const ign = interaction.options.getString("username")!;
@@ -45,6 +47,17 @@ export async function setIGN(interaction : ChatInputCommandInteraction<CacheType
             mcuuid: uuid,
         }
     });
+
+
+    if (!serverInfo) {
+        await interaction.reply({
+            content: "Information set successfully, but something went wrong with the whitelist... Contact an admin.",
+            ephemeral: true
+        });
+        return;
+    }
+
+    await whitelist(ign);
 
     return whois(interaction);
 }

@@ -6,6 +6,7 @@ import { getCoords } from "./commands/coords/getCoords";
 import { setCoords } from "./commands/coords/setCoords";
 import { setIGN } from "./commands/link/setIGN";
 import { deleteCoords } from "./commands/coords/delCoords";
+import { serverInfo } from "./commands/server/serverInfo";
 
 config(); // Set up dotenv config and get it from root of project
 
@@ -30,12 +31,20 @@ client.on("interactionCreate", async (interaction: Interaction) => {
     if (command === "ping") {
       await interaction.reply("pong");
     }
+
+    console.log("Command: " + command);
     switch (command) {
       case "whois":
         whois(interaction as ChatInputCommandInteraction);
         break;
       case "minecraft":
         setIGN(interaction as ChatInputCommandInteraction);
+        break;
+      case "server":
+        serverInfo(interaction as ChatInputCommandInteraction);
+        break;
+      case "ip":
+        serverInfo(interaction as ChatInputCommandInteraction);
         break;
       case "coords-set":
         setCoords(interaction as ChatInputCommandInteraction);
